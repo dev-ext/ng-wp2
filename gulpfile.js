@@ -13,14 +13,14 @@ var sass = require('gulp-sass');
 gulp.task('inject', function () {
 	var target = gulp.src('./www/index.html');
 
-	var scripts = gulp.src(['./**/*.js'], { cwd: __dirname + '/www'})
+  var src = ['./**/*.js', '!/**/app.js'];
+	var scripts = gulp.src(src, { cwd: __dirname + '/www'})
 			.pipe(angularFilesort());
   var styles = gulp.src(['./www/**/*.css'])
 
 	return target
 	.pipe(wiredep())
-	.pipe(inject(scripts), {relative: true})
-  .pipe(inject(styles))
+  .pipe(inject(scripts))
 	.pipe(gulp.dest('./www/'));
 });
 
