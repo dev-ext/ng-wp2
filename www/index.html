@@ -8,7 +8,7 @@
 	<!-- endinject -->
 
 </head>
-<body ng-controller="appCtrl">
+<body>
 	 <div ui-view></div>
 
 <!-- build:js scripts/libs.js -->
@@ -20,13 +20,13 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/app.build.js -->
-<script src="/scripts/app.js"></script>
-<script src="/scripts/app.config.js"></script>
+<script src="/www/scripts/commons/app.js"></script>
+<!-- depscripts:js -->
+<script src="/www/scripts/commons/app.config.js"></script>
+<!-- endinject -->
 <!-- inject:js -->
-<script src="/views/home/home.controller.js"></script>
-<script src="/scripts/services/data.service.js"></script>
-<script src="/scripts/app.controller.js"></script>
-<script src="/scripts/app.config.js"></script>
+<script src="/www/scripts/services/data.service.js"></script>
+<script src="/www/views/home/home.controller.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 </body>

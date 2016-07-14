@@ -1,7 +1,6 @@
 
 var gulp = require('gulp');
 var inject = require('gulp-inject');
-var angularFilesort = require('gulp-angular-filesort');
 var wiredep = require('wiredep').stream;
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
@@ -12,14 +11,15 @@ var sass = require('gulp-sass');
 
 gulp.task('inject', function () {
 	var target = gulp.src('./www/index.html');
+  var srcDep = ['./www/scripts/commons/*.js', '!./www/scripts/commons/app.js'];
+  var depScripts = gulp.src(srcDep, {read: false}, { cwd: __dirname + '/www'});
 
-  var src = ['./**/*.js', '!/**/app.js'];
-	var scripts = gulp.src(src, { cwd: __dirname + '/www'})
-			.pipe(angularFilesort());
-  var styles = gulp.src(['./www/**/*.css'])
+  var src = ['./www/**/*.js', '!./www/scripts/commons/*.*'];
+	var scripts = gulp.src(src,{read: false}, { cwd: __dirname + '/www'});
 
 	return target
 	.pipe(wiredep())
+  .pipe(inject(depScripts, {name: 'depscripts'}))
   .pipe(inject(scripts))
 	.pipe(gulp.dest('./www/'));
 });
