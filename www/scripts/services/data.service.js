@@ -14,8 +14,23 @@ app.service('data', ['$http', '$q', 'appConfig', function($http, $q, appConfig){
 		return dfd.promise;
 	} 
 
+	function _getPost(query) {
+		var query = query ? query : '1';
+		console.log(query);
+		var dfd = $q.defer();
+		var url = appConfig.endPoint + '/posts/'+ query;
+		$http.get(url)
+		.then(function(d){
+			dfd.resolve(d);
+		},function(d){
+			dfd.reject(d);
+		});
+		return dfd.promise;
+	}
+
 	return {
-		getPosts: _getPosts
+		getPosts: _getPosts,
+		getPost: _getPost
 	};
 
 
